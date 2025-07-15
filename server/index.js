@@ -4,7 +4,8 @@ require("dotenv").config();
 const sequelize = require("./config/database");
 
 const authRoutes = require("./routes/auth");
-const transactionRoutes = require("./routes/transactionRoutes"); // ✅ NOVO
+const transactionRoutes = require("./routes/transactionRoutes");
+const metasRoutes = require("./routes/metas"); // importar rota metas
 
 const app = express();
 
@@ -14,8 +15,9 @@ app.use(express.json());
 // Rotas públicas
 app.use("/api/auth", authRoutes);
 
-// Rotas protegidas (JWT)
-app.use("/api/transactions", transactionRoutes); // ✅ NOVO
+// Rotas protegidas
+app.use("/api/transactions", transactionRoutes);
+app.use("/api/metas", metasRoutes);  // incluir rotas metas aqui
 
 // Rota de teste
 app.get("/", (req, res) => {
